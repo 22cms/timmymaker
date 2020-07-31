@@ -4,6 +4,14 @@ var editedLottie;
 var showJSON = false;
 const anim = new TGSKit();
 
+//Declare Legacy and New Color Palette Picker
+
+const RGBPalettePicker = document.getElementById("rgbpalette");
+const RGBPalettePickerLegacy = document.getElementById("rgbpalettelegacy");
+
+var SelectedPalette = 'New';
+if (screen.width>600) {SelectedPalette = 'Legacy';}
+
 //Declare all parts of the vector image
 
 const catHead = document.getElementById("head");
@@ -17,7 +25,8 @@ const catEarOut = document.getElementById("earout");
 const catTail = document.getElementById("tail");
 const catTailPiece = document.getElementById("tailpiece");
 
-//Declare all text boxes, the textarea and buttons.
+//Declare all rgb pickers, the textarea and buttons.
+
 
 const headInput = document.getElementById("headInput");
 const skinInput = document.getElementById("skinInput");
@@ -25,6 +34,13 @@ const earInInput = document.getElementById("earInInput");
 const tailPieceInput = document.getElementById("TailPieceInput");
 const borderInput = document.getElementById("borderInput");
 const eyesInput = document.getElementById("eyesInput");
+//Edit: Now Legacy text boxes are declared too for mobile
+const headInputLegacy = document.getElementById("headInputLegacy");
+const skinInputLegacy = document.getElementById("skinInputLegacy");
+const earInInputLegacy = document.getElementById("earInInputLegacy");
+const tailPieceInputLegacy = document.getElementById("TailPieceInputLegacy");
+const borderInputLegacy = document.getElementById("borderInputLegacy");
+const eyesInputLegacy = document.getElementById("eyesInputLegacy");
 
 const jsonInput = document.getElementById("jsonInput");
 const applyButton = document.getElementById("applyButton");
@@ -52,13 +68,23 @@ applyPaletteJSON();
 //Function: update the palette to the current values of the text boxes
 
 function updatePalette() {
-	PaletteHead = hexToRgb(headInput.value);
-	PaletteBorder = hexToRgb(borderInput.value);
-	PaletteSkin = hexToRgb(skinInput.value);
-	PaletteTailPiece = hexToRgb(tailPieceInput.value);
-	PaletteEarIn = hexToRgb(earInInput.value);
-	PaletteEyesMounth = hexToRgb(eyesInput.value);
-	console.log('Palette Updated')
+	if (SelectedPalette == 'New') {
+		PaletteHead = hexToRgb(headInput.value);
+		PaletteBorder = hexToRgb(borderInput.value);
+		PaletteSkin = hexToRgb(skinInput.value);
+		PaletteTailPiece = hexToRgb(tailPieceInput.value);
+		PaletteEarIn = hexToRgb(earInInput.value);
+		PaletteEyesMounth = hexToRgb(eyesInput.value);
+	}
+	else {
+		PaletteHead = headInputLegacy.value;
+		PaletteBorder = borderInputLegacy.value;
+		PaletteSkin = skinInputLegacy.value;
+		PaletteTailPiece = tailPieceInputLegacy.value;
+		PaletteEarIn = earInInputLegacy.value;
+		PaletteEyesMounth = eyesInputLegacy.value;
+	}
+	console.log('Palette Updated');
 }
 
 //Function: apply the palette to the preview image
@@ -163,4 +189,19 @@ function hexToRgb(hex) {
     g = parseInt(result[2], 16);
     b = parseInt(result[3], 16);
 	return r + ", " + g + ", " + b;
+}
+
+//Function: Switchs Between Legacy and New Color Picker Mode
+
+function PickerSwitch() {
+	if (SelectedPalette == 'New') {
+		SelectedPalette = 'Legacy';
+		RGBPalettePicker.style = 'display: none';
+		RGBPalettePickerLegacy.style = 'display: inline';
+		}
+	else {
+		SelectedPalette = 'New';
+		RGBPalettePicker.style = 'display: inline';
+		RGBPalettePickerLegacy.style = 'display: none';
+	}
 }

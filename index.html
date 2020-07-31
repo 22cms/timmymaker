@@ -25,21 +25,41 @@
 				</div>
 				<div name="rgbtab" class="contv">
 					<h5 class="white-text" style="margin-top: 0;">RGB Values</h5>
-					<div class="conth noconthspace rgbmargin">
-						<div style="display: flex; flex-direction: column;"><input value="#ffabac" id="headInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="headInput">Head Color</label></div>
-						<div id="spacerw"></div>
-						<div style="display: flex; flex-direction: column;"><input value="#fff3eb" id="skinInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="skinInput">Skin Color</label></div>
+					<div id="rgbpalette">
+						<div class="conth noconthspace rgbmargin">
+							<div style="display: flex; flex-direction: column;"><input value="#ffabac" id="headInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="headInput">Head Color</label></div>
+							<div id="spacerw"></div>
+							<div style="display: flex; flex-direction: column;"><input value="#fff3eb" id="skinInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="skinInput">Skin Color</label></div>
+						</div>
+						<div class="conth noconthspace rgbmargin">
+							<div style="display: flex; flex-direction: column;"><input value="#cc6283" id="earInInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="earInInput">Ear In Color</label></div>
+							<div id="spacerw"></div>
+							<div style="display: flex; flex-direction: column;"><input value="#f2818d" id="TailPieceInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="TailPieceInput">Tail Second Color</label></div>
+						</div>
+						<div class="conth noconthspace">
+							<div style="display: flex; flex-direction: column;"><input value="#6d0448" id="borderInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="borderInput">Border Color</label></div>
+							<div id="spacerw"></div>
+							<div style="display: flex; flex-direction: column;"><input value="#000000" id="eyesInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="eyesInput">Eyes & Mounth Color</label></div>
+						</div>
 					</div>
-					<div class="conth noconthspace rgbmargin">
-						<div style="display: flex; flex-direction: column;"><input value="#cc6283" id="earInInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="earInInput">Ear In Color</label></div>
-						<div id="spacerw"></div>
-						<div style="display: flex; flex-direction: column;"><input value="#f2818d" id="TailPieceInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="TailPieceInput">Tail Second Color</label></div>
+					<div id="rgbpalettelegacy">
+						<div class="conth noconthspace">
+							<div style="display: flex; flex-direction: column;"><input value="255, 171, 172" id="headInputLegacy" type="text" class="white-text" style="width: 120px;"><label class="active" for="headInput">Head Color</label></div>
+							<div id="spacerw"></div>
+							<div style="display: flex; flex-direction: column;"><input value="255, 243, 235" id="skinInputLegacy" type="text" class="white-text" style="width: 120px;"><label class="active" for="skinInput">Skin Color</label></div>
+						</div>
+						<div class="conth noconthspace">
+							<div style="display: flex; flex-direction: column;"><input value="204, 98, 131" id="earInInputLegacy" type="text" class="white-text" style="width: 120px;"><label class="active" for="earInInput">Ear In Color</label></div>
+							<div id="spacerw"></div>
+							<div style="display: flex; flex-direction: column;"><input value="242, 129, 141" id="TailPieceInputLegacy" type="text" class="white-text" style="width: 120px;"><label class="active" for="TailPieceInput">Tail Second Color</label></div>
+						</div>
+						<div class="conth noconthspace">
+							<div style="display: flex; flex-direction: column;"><input value="109, 4, 72" id="borderInputLegacy" type="text" class="white-text" style="width: 120px;"><label class="active" for="borderInput">Border Color</label></div>
+							<div id="spacerw"></div>
+							<div style="display: flex; flex-direction: column;"><input value="0, 0, 0" id="eyesInputLegacy" type="text" class="white-text" style="width: 120px;"><label class="active" for="eyesInput">Eyes & Mounth Color</label></div>
+						</div>
 					</div>
-					<div class="conth noconthspace">
-						<div style="display: flex; flex-direction: column;"><input value="#6d0448" id="borderInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="borderInput">Border Color</label></div>
-						<div id="spacerw"></div>
-						<div style="display: flex; flex-direction: column;"><input value="#000000" id="eyesInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;"><label class="active" for="eyesInput">Eyes & Mounth Color</label></div>
-					</div>
+					<p style="font-size: 12px;" class="grey-text" onClick="PickerSwitch()">Switch RGB Pickers Mode</p>
 				</div>
 				<div name="lottiecode" class="contv">
 					<h5 class="white-text" style="margin-top: 0;">Lottie (JSON) Code</h5>

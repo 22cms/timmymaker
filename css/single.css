@@ -103,7 +103,12 @@
 .rgbmargin {
 	margin-bottom: 20px;
 }
-
+#rgbpalette {
+	display: inline;
+}
+#rgbpalettelegacy {
+	display: none;
+}
 @media only screen
 and (max-device-width:900px)
 {.contvl {
@@ -165,6 +170,13 @@ and (max-device-width: 600px)
 	flex-direction: column;
 }
 #openapp {
+	display: inline;
+
+}
+#rgbpalette {
+	display: none;
+}
+#rgbpalettelegacy {
 	display: inline;
 }
 }
