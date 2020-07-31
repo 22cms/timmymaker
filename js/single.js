@@ -9,8 +9,8 @@ const anim = new TGSKit();
 const RGBPalettePicker = document.getElementById("rgbpalette");
 const RGBPalettePickerLegacy = document.getElementById("rgbpalettelegacy");
 
-var SelectedPalette = 'New';
-if (screen.width>600) {SelectedPalette = 'Legacy';}
+var SelectedPalette = 'Legacy';
+if (screen.width>600) {SelectedPalette = 'New';}
 
 //Declare all parts of the vector image
 
