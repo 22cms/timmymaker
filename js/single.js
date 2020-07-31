@@ -37,12 +37,12 @@ copyButton.addEventListener('click',copyJSON);
 
 //Declare All Palette's Colors and set them as default obtaining them from text boxes' default values
 
-var PaletteHead = headInput.value;
-var PaletteBorder = borderInput.value;
-var PaletteSkin = skinInput.value;
-var PaletteTailPiece = tailPieceInput.value;
-var PaletteEarIn = earInInput.value;
-var PaletteEyesMounth = eyesInput.value;
+var PaletteHead = hexToRgb(headInput.value);
+var PaletteBorder = hexToRgb(borderInput.value);
+var PaletteSkin = hexToRgb(skinInput.value);
+var PaletteTailPiece = hexToRgb(tailPieceInput.value);
+var PaletteEarIn = hexToRgb(earInInput.value);
+var PaletteEyesMounth = hexToRgb(eyesInput.value);
 
 //Apply the palette to the image and json
 
@@ -52,12 +52,12 @@ applyPaletteJSON();
 //Function: update the palette to the current values of the text boxes
 
 function updatePalette() {
-	PaletteHead = headInput.value;
-	PaletteBorder = borderInput.value;
-	PaletteSkin = skinInput.value;
-	PaletteTailPiece = tailPieceInput.value;
-	PaletteEarIn = earInInput.value;
-	PaletteEyesMounth = eyesInput.value;
+	PaletteHead = hexToRgb(headInput.value);
+	PaletteBorder = hexToRgb(borderInput.value);
+	PaletteSkin = hexToRgb(skinInput.value);
+	PaletteTailPiece = hexToRgb(tailPieceInput.value);
+	PaletteEarIn = hexToRgb(earInInput.value);
+	PaletteEyesMounth = hexToRgb(eyesInput.value);
 	console.log('Palette Updated')
 }
 
@@ -152,4 +152,15 @@ function copyJSON() {
 	document.execCommand("copy");
 	M.toast({html: 'JSON Code copied to clipboard'});
 	borderInput.value = borderOriginalValue;
+}
+
+//Function: Converts Hexadecimal Color Numbers to RGB Values
+
+function hexToRgb(hex) {
+	var r, g, b;
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    r = parseInt(result[1], 16);
+    g = parseInt(result[2], 16);
+    b = parseInt(result[3], 16);
+	return r + ", " + g + ", " + b;
 }
