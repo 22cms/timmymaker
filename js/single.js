@@ -77,12 +77,12 @@ function updatePalette() {
 		PaletteEyesMounth = hexToRgb(eyesInput.value);
 	}
 	else {
-		PaletteHead = headInputLegacy.value;
-		PaletteBorder = borderInputLegacy.value;
-		PaletteSkin = skinInputLegacy.value;
-		PaletteTailPiece = tailPieceInputLegacy.value;
-		PaletteEarIn = earInInputLegacy.value;
-		PaletteEyesMounth = eyesInputLegacy.value;
+		PaletteHead = checkHexColor(headInputLegacy.value);
+		PaletteBorder = checkHexColor(borderInputLegacy.value);
+		PaletteSkin = checkHexColor(skinInputLegacy.value);
+		PaletteTailPiece = checkHexColor(tailPieceInputLegacy.value);
+		PaletteEarIn = checkHexColor(earInInputLegacy.value);
+		PaletteEyesMounth = checkHexColor(eyesInputLegacy.value);
 	}
 	console.log('Palette Updated');
 }
@@ -189,6 +189,15 @@ function hexToRgb(hex) {
     g = parseInt(result[2], 16);
     b = parseInt(result[3], 16);
 	return r + ", " + g + ", " + b;
+}
+
+//Function: Check if the input is an Hexadecimal Number (with #) and converts it to RGB
+
+function checkHexColor(color) {
+	if (color.slice(0, 1) == '#') {
+	return hexToRgb(color);}
+	else {
+	return color;}
 }
 
 //Function: Switchs Between Legacy and New Color Picker Mode
