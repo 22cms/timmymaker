@@ -71,10 +71,10 @@
 	align-items: center;
 }
 .glow {
-	color: #909090;
+	color: white;
 }
 .glow:hover {
-	color: white;
+	color: #909090;
 }
 .thumb {
 	display: none;
@@ -108,6 +108,9 @@
 }
 #rgbpalettelegacy {
 	display: none;
+}
+.spacerh {
+	height: 15px;
 }
 @media only screen
 and (max-device-width:900px)
