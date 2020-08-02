@@ -266,3 +266,30 @@ function playPauseCat() {
 		isLottiePlaying = true;
 	}
 }
+
+//Function: Randomizes Palette's Colors
+
+function randomizePalette() {
+	if (SelectedPalette == 'New') {PickerSwitch()};
+	
+		headInputLegacy.value = randomizeRGB();
+		borderInputLegacy.value = randomizeRGB();
+		skinInputLegacy.value = randomizeRGB();
+		tailPieceInputLegacy.value = randomizeRGB();
+		earInInputLegacy.value = randomizeRGB();
+		eyesInputLegacy.value = randomizeRGB();
+		
+		updatePalette();
+		applyPaletteJSON();
+		animPreview.load(editedLottie);
+}
+
+//Function: Randomizes an RGB Color
+
+function randomizeRGB() {
+	var r = Math.floor(Math.random() * 256);
+	var g = Math.floor(Math.random() * 256);
+	var b = Math.floor(Math.random() * 256);
+	var sp = ', ';
+	return r + sp + g + sp + b;
+}
