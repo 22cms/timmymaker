@@ -93,15 +93,15 @@ function RGBtoLottieColor(col) {
 //Function: Apply the changes to the Lottie code
 
 function applyPaletteJSON() {
-	editedLottie = lottieanimation
-	editedLottie = editedLottie.replace(/0.4271, 0.1061, 0.2821/g, RGBtoLottieColor(PaletteBorder));
-	editedLottie = editedLottie.replace(/1.0001, 0.6711, 0.6751/g, RGBtoLottieColor(PaletteHead));
-	editedLottie = editedLottie.replace(/1.0001, 0.9531, 0.9221/g, RGBtoLottieColor(PaletteSkin));
-	editedLottie = editedLottie.replace(/0.9491, 0.5061, 0.5531/g, RGBtoLottieColor(PaletteTailPiece));
-	editedLottie = editedLottie.replace(/0.8001, 0.3841, 0.5141/g, RGBtoLottieColor(PaletteEarIn));
-	editedLottie = editedLottie.replace(/0.0001, 0.0001, 0.0001/g, RGBtoLottieColor(PaletteEyesMounth));
+	editedLottie = lottieanimation;
+	editedLottie = editedLottie.replace(/0.4271,0.1061,0.2821/g, RGBtoLottieColor(PaletteBorder));
+	editedLottie = editedLottie.replace(/1.0001,0.6711,0.6751/g, RGBtoLottieColor(PaletteHead));
+	editedLottie = editedLottie.replace(/1.0001,0.9531,0.9221/g, RGBtoLottieColor(PaletteSkin));
+	editedLottie = editedLottie.replace(/0.9491,0.5061,0.5531/g, RGBtoLottieColor(PaletteTailPiece));
+	editedLottie = editedLottie.replace(/0.8001,0.3841,0.5141/g, RGBtoLottieColor(PaletteEarIn));
+	editedLottie = editedLottie.replace(/0.0001,0.0001,0.0001/g, RGBtoLottieColor(PaletteEyesMounth));
 	
-	if (generalBorderCheck.checked==true) {editedLottie = editedLottie.replace(/1, 1, 1, 1/g, RGBtoLottieColor(lighterColor(PaletteBorder, '100')) + ", 1"); 
+	if (generalBorderCheck.checked==true) {editedLottie = editedLottie.replace(/1,1,1,1/g, RGBtoLottieColor(lighterColor(PaletteBorder, '100')) + ", 1"); 
 		console.log("General Border Color Changed, I guess")}
 	else {editedLottie = editedLottie.replace(new RegExp (RGBtoLottieColor(lighterColor(PaletteBorder, '150', false)) + ", 1", "g"), "1, 1, 1, 1")};
 	console.log('JSON Changed');
@@ -251,7 +251,7 @@ function addCurse() {
 	M.toast({html: "<var style='width:140px;'>Felis silvestris catus</var> has been <var class='center-align' style='width: 56px'>cursed</var> by the Lord"});
 	applyPaletteJSON();
 	animPreview.load(editedLottie);
-	cursePower = +cursePower + 0.1;
+	cursePower += 0.1;
 }
 
 //Function: Pause and Plays the Animation when clicked
