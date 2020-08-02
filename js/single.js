@@ -1,7 +1,9 @@
-//Declare editedLottie, showJSONCode and anim from tgskit.js
+//Declare editedLottie, isLottiePlaying, lottieanimation, cursePower and anim from tgskit.js
 
 var editedLottie;
-var showJSON = false;
+var lottieanimation = originalLottie;
+cursePower = 1.5;
+isLottiePlaying = true;
 const anim = new TGSKit();
 
 //Declare Legacy and New Color Palette Picker, declare General Border's checkbox
@@ -13,18 +15,8 @@ const generalBorderCheck = document.getElementById("generalBorderCheck");
 var SelectedPalette = 'Legacy';
 if (screen.width>600) {SelectedPalette = 'New';}
 
-//Declare all parts of the vector image and lottie player
+//Declare the lottie player
 
-const catHead = document.getElementById("head");
-const catSkin = document.getElementById("skin");
-const catEyes = document.getElementById("eyes");
-const catMounth = document.getElementById("mounth");
-const catBorder = document.getElementById("border");
-const catBorder2 = document.getElementById("border2");
-const catEarIn = document.getElementById("earin");
-const catEarOut = document.getElementById("earout");
-const catTail = document.getElementById("tail");
-const catTailPiece = document.getElementById("tailpiece");
 const animPreview = document.getElementById("animPreview");
 
 //Declare all rgb pickers, the textarea and buttons.
@@ -64,7 +56,6 @@ var PaletteEyesMounth = hexToRgb(eyesInput.value);
 
 //Apply the palette to the image and json
 
-applyPaletteImage();
 applyPaletteJSON();
 animPreview.load(JSON.parse(editedLottie));
 
@@ -90,22 +81,6 @@ function updatePalette() {
 	console.log('Palette Updated');
 }
 
-//Function: apply the palette to the preview image (animated and Not
-
-function applyPaletteImage() {
-	catBorder.style = 'stroke: rgb(' + PaletteBorder + '); stroke-width:3.61444; fill: none;';
-	catBorder2.style = 'stroke: rgb(' + PaletteBorder + '); stroke-width:3.61444; fill: none;';
-	catSkin.style = 'fill: rgb(' + PaletteSkin + ');';
-	catTailPiece.style = 'fill: rgb(' + PaletteTailPiece + ');';
-	catEarIn.style = 'fill: rgb(' + PaletteEarIn + ');';
-	catEyes.style = 'fill: rgb(' + PaletteEyesMounth + ');';
-	catMounth.style = 'stroke: rgb(' + PaletteEyesMounth + '); fill:none;stroke-width:4.052;';
-	catHead.style= "fill: rgb(" + PaletteHead + ");";
-	catTail.style = "fill: rgb(" + PaletteHead + ");";
-	catEarOut.style = "fill: rgb(" + PaletteHead + ");";
-	
-}
-
 //Function: converts RGB values from 0 to 255 into RGB values from 0.000 to 1.000, suitable for Lottie
 
 function RGBtoLottieColor(col) {
@@ -126,10 +101,9 @@ function applyPaletteJSON() {
 	editedLottie = editedLottie.replace(/0.8001, 0.3841, 0.5141/g, RGBtoLottieColor(PaletteEarIn));
 	editedLottie = editedLottie.replace(/0.0001, 0.0001, 0.0001/g, RGBtoLottieColor(PaletteEyesMounth));
 	
-	if (generalBorderCheck.checked==true) {editedLottie = editedLottie.replace(/1, 1, 1, 1/g, RGBtoLottieColor(lighterColor(PaletteBorder, '100')) + ", 1"); console.log("General Border Color Changed, I guess")}
+	if (generalBorderCheck.checked==true) {editedLottie = editedLottie.replace(/1, 1, 1, 1/g, RGBtoLottieColor(lighterColor(PaletteBorder, '100')) + ", 1"); 
+		console.log("General Border Color Changed, I guess")}
 	else {editedLottie = editedLottie.replace(new RegExp (RGBtoLottieColor(lighterColor(PaletteBorder, '150', false)) + ", 1", "g"), "1, 1, 1, 1")};
-	
-	if (showJSON == true) jsonInput.value = editedLottie;
 	console.log('JSON Changed');
 }
 
@@ -137,8 +111,8 @@ function applyPaletteJSON() {
 
 function buttonPressed() {
 	updatePalette();
-	applyPaletteImage();
 	applyPaletteJSON();
+	isLottiePlaying = true;
 	animPreview.load(JSON.parse(editedLottie));
 }
 
@@ -167,18 +141,19 @@ function downloadString(text, fileType, fileName) {
 }
 
 //Function: Copy Lottie Code to Clipboard when copyButton is clicked
-//Note: this works by saving borderInput's value, changing it to Lottie Code, selecting it, and then copying it and resetting to original value.
+//Note: this works by saving borderInputLegacy's value, changing it to Lottie Code, selecting it, and then copying it and resetting to original value.
 //It's a bit dumb but it works well and it doesn't need to edit HTML.
 
 function copyJSON() {
-	var borderOriginalValue = borderInput.value;
-	borderInput.value = editedLottie;
-	var copyText = document.querySelector("#borderInput");
+	var borderOriginalValue = borderInputLegacy.value;
+	if (SelectedPalette == 'New') {PickerSwitch()};
+	borderInputLegacy.value = editedLottie;
+	var copyText = document.querySelector("#borderInputLegacy");
 	copyText.select();
 	copyText.setSelectionRange(0, 99999);
 	document.execCommand("copy");
 	M.toast({html: 'JSON Code copied to clipboard'});
-	borderInput.value = borderOriginalValue;
+	borderInputLegacy.value = borderOriginalValue;
 }
 
 //Function: Converts Hexadecimal Color Numbers to RGB Values
@@ -239,27 +214,32 @@ function lighterColor(OrigColor, Light, check) {
 //Function: Reset Cat's Lottie Code to default state
 
 function resetCat() {
-	editedLottie = lottieanimation;
+	lottieanimation = originalLottie;
 	M.toast({html: "<var style='width:145px;'>Felis silvestris catus</var> is now clear from curses, and he's the second son of God"});
 	applyPaletteJSON();
+	cursePower = 1.1;
 	animPreview.load(JSON.parse(editedLottie));
 }
 
 //Function: Edits the editedLottie adding a Curse/Random Corruption. 100% made by @Marekkon5 lmso
 
+
 function addCurse() {
-	if (typeof editedLottie != 'object') {
-		editedLottie = JSON.parse(editedLottie);
+	if (!lottieanimation) {
+		lottieanimation = originalLottie;
+	}
+	if (typeof lottieanimation != 'object') {
+		lottieanimation = JSON.parse(lottieanimation);
    }
    //Janky loops
-	for(let i=0; i<editedLottie.layers.length; i++) {
-		for(let k of Object.keys(editedLottie.layers[i].ks)) {
-	if (typeof editedLottie.layers[i].ks[k].k[0] == 'object') {
+	for(let i=0; i<lottieanimation.layers.length; i++) {
+		for(let k of Object.keys(lottieanimation.layers[i].ks)) {
+	if (typeof lottieanimation.layers[i].ks[k].k[0] == 'object') {
      
-	for(let j=0; j<editedLottie.layers[i].ks[k].k.length; j++){
-		for (let l=0; l<editedLottie.layers[i].ks[k].k[j].s.length; l++) {
+	for(let j=0; j<lottieanimation.layers[i].ks[k].k.length; j++){
+		for (let l=0; l<lottieanimation.layers[i].ks[k].k[j].s.length; l++) {
         
-		editedLottie.layers[i].ks[k].k[j].s[l] = Math.random() * editedLottie.layers[i].ks[k].k[j].s[l] * 2;
+		lottieanimation.layers[i].ks[k].k[j].s[l] = Math.random() * lottieanimation.layers[i].ks[k].k[j].s[l] * cursePower;
       }
      }
      }
@@ -267,9 +247,22 @@ function addCurse() {
    }
    
 	//So Francesco can do more replacing
-	editedLottie = JSON.stringify(editedLottie);
+	lottieanimation = JSON.stringify(lottieanimation);
 	M.toast({html: "<var style='width:140px;'>Felis silvestris catus</var> has been <var class='center-align' style='width: 56px'>cursed</var> by the Lord"});
-	M.toast({html: "Just Kidding, this feature is still work in progress"});
 	applyPaletteJSON();
-	animPreview.load(JSON.parse(editedLottie));
+	animPreview.load(editedLottie);
+	cursePower = +cursePower + 0.1;
+}
+
+//Function: Pause and Plays the Animation when clicked
+
+function playPauseCat() {
+	if (isLottiePlaying == true) {
+		animPreview.pause();
+		isLottiePlaying = false;
+	}
+	else {
+		animPreview.play();
+		isLottiePlaying = true;
+	}
 }
