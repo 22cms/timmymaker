@@ -21,7 +21,6 @@ const animPreview = document.getElementById("animPreview");
 
 //Declare all rgb pickers, the textarea and buttons.
 
-
 const headInput = document.getElementById("headInput");
 const skinInput = document.getElementById("skinInput");
 const earInInput = document.getElementById("earInInput");
@@ -54,6 +53,12 @@ var PaletteTailPiece = hexToRgb(tailPieceInput.value);
 var PaletteEarIn = hexToRgb(earInInput.value);
 var PaletteEyesMounth = hexToRgb(eyesInput.value);
 
+//Declare Category Titles for easterEgg
+
+const title1 = document.getElementById("title1");
+const title2 = document.getElementById("title2");
+const title3 = document.getElementById("title3");
+
 //Apply the palette to the image and json
 
 applyPaletteJSON();
@@ -71,12 +76,12 @@ function updatePalette() {
 		PaletteEyesMounth = hexToRgb(eyesInput.value);
 	}
 	else {
-		PaletteHead = checkHexColor(headInputLegacy.value);
-		PaletteBorder = checkHexColor(borderInputLegacy.value);
-		PaletteSkin = checkHexColor(skinInputLegacy.value);
-		PaletteTailPiece = checkHexColor(tailPieceInputLegacy.value);
-		PaletteEarIn = checkHexColor(earInInputLegacy.value);
-		PaletteEyesMounth = checkHexColor(eyesInputLegacy.value);
+		PaletteHead = checkHexColor(headInputLegacy.value, PaletteHead);
+		PaletteBorder = checkHexColor(borderInputLegacy.value, PaletteBorder);
+		PaletteSkin = checkHexColor(skinInputLegacy.value, PaletteSkin);
+		PaletteTailPiece = checkHexColor(tailPieceInputLegacy.value, PaletteTailPiece);
+		PaletteEarIn = checkHexColor(earInInputLegacy.value, PaletteEarIn);
+		PaletteEyesMounth = checkHexColor(eyesInputLegacy.value, PaletteEyesMounth);
 	}
 	console.log('Palette Updated');
 }
@@ -167,11 +172,12 @@ function hexToRgb(hex) {
 	return r + ", " + g + ", " + b;
 }
 
-//Function: Check if the input is an Hexadecimal Number (with #) and converts it to RGB
+//Function: Check if the input is an Hexadecimal Number (with #) and converts it to RGB. Check Easter Egg too
 
-function checkHexColor(color) {
+function checkHexColor(color, palette) {
 	if (color.slice(0, 1) == '#') {
 	return hexToRgb(color);}
+	else if (color == 'penis') {easterEgg(); return palette;}
 	else {
 	return color;}
 }
@@ -219,6 +225,7 @@ function resetCat() {
 	applyPaletteJSON();
 	cursePower = 1.1;
 	animPreview.load(JSON.parse(editedLottie));
+	navigator.vibrate(0);
 }
 
 //Function: Edits the editedLottie adding a Curse/Random Corruption. 100% made by @Marekkon5 lmso
@@ -292,4 +299,16 @@ function randomizeRGB() {
 	var b = Math.floor(Math.random() * 256);
 	var sp = ', ';
 	return r + sp + g + sp + b;
+}
+
+//Function: Easter Egg ;)
+
+function easterEgg() {
+	lottieanimation = easterLottie;
+	title1.innerText = 'ahahah';
+	title2.innerText = 'vibing penis';
+	title3.innerText = 'so funi';
+	downJSONButton.innerText = '@francasDM';
+	downloadButton.innerText = '@Marekkon5';
+	navigator.vibrate([99999]);
 }
