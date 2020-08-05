@@ -310,5 +310,5 @@ function easterEgg() {
 	title3.innerText = 'so funi';
 	downJSONButton.innerText = '@francasDM';
 	downloadButton.innerText = '@Marekkon5';
-	navigator.vibrate([99999]);
+	navigator.vibrate([600000]);
 }
