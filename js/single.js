@@ -1,5 +1,6 @@
-//Declare editedLottie, isLottiePlaying, lottieanimation, cursePower and anim from tgskit.js
+//Declare editedLottie, isLottiePlaying, lottieanimation, cursePower and anim from tgskit.js. Declare developer mode var
 
+var debugVar = false;
 var editedLottie;
 var lottieanimation = originalLottie;
 cursePower = 1.5;
@@ -83,7 +84,7 @@ function updatePalette() {
 		PaletteEarIn = checkHexColor(earInInputLegacy.value, PaletteEarIn);
 		PaletteEyesMounth = checkHexColor(eyesInputLegacy.value, PaletteEyesMounth);
 	}
-	console.log('Palette Updated');
+	debugLog('Palette Updated');
 }
 
 //Function: converts RGB values from 0 to 255 into RGB values from 0.000 to 1.000, suitable for Lottie
@@ -91,7 +92,7 @@ function updatePalette() {
 function RGBtoLottieColor(col) {
 	var LottieColor;
 	LottieColor = parseInt('' + (col.split(", ")[0] / 255) * 1000) / 1000 + ', ' + parseInt('' + (col.split(", ")[1] / 255) * 1000) / 1000 + ', ' + parseInt('' + (col.split(", ")[2] / 255) * 1000) / 1000;
-	console.log ('RGB ' + col + ' converted to ' + LottieColor)
+	debugLog ('RGB ' + col + ' converted to ' + LottieColor)
 	return LottieColor;
 }
 
@@ -107,14 +108,15 @@ function applyPaletteJSON() {
 	editedLottie = editedLottie.replace(/0.0001,0.0001,0.0001/g, RGBtoLottieColor(PaletteEyesMounth));
 	
 	if (generalBorderCheck.checked==true) {editedLottie = editedLottie.replace(/1,1,1,1/g, RGBtoLottieColor(lighterColor(PaletteBorder, '100')) + ", 1"); 
-		console.log("General Border Color Changed, I guess")}
+		debugLog("General Border Color Changed, I guess")}
 	else {editedLottie = editedLottie.replace(new RegExp (RGBtoLottieColor(lighterColor(PaletteBorder, '150', false)) + ", 1", "g"), "1, 1, 1, 1")};
-	console.log('JSON Changed');
+	debugLog('JSON Changed');
 }
 
 //Function: Start everything at the click of the applyButton button
 
 function buttonPressed() {
+	debugLog("buttonpressed() initialized");
 	updatePalette();
 	applyPaletteJSON();
 	isLottiePlaying = true;
@@ -125,8 +127,9 @@ function buttonPressed() {
 
 function download() {
 	anim.load(editedLottie);
-	console.log('Sticker Download Started');
+	debugLog('Sticker Download Started');
 	M.toast({html: 'Sticker Download Started'});
+	debugLog("Sticker Download Started");
 	anim.download('sticker');
 }
 
@@ -158,6 +161,7 @@ function copyJSON() {
 	copyText.setSelectionRange(0, 99999);
 	document.execCommand("copy");
 	M.toast({html: 'JSON Code copied to clipboard'});
+	debugLog("JSON Code copied to clipboard");
 	borderInputLegacy.value = borderOriginalValue;
 }
 
@@ -195,6 +199,7 @@ function PickerSwitch() {
 		RGBPalettePicker.style = 'display: inline';
 		RGBPalettePickerLegacy.style = 'display: none';
 	}
+	debugLog("Color picker Switched");
 }
 
 //Function: Limit a Number between 0 and 255 (https://www.w3resource.com/javascript-exercises/javascript-math-exercise-37.php)
@@ -202,6 +207,7 @@ function PickerSwitch() {
 function limitToRGB(val) {
 	var min = 0;
 	var max = 255;
+	if (val >> max) debugLog(val + " is higher than 255, so it's been limited to RGB Color Space");
 	return val < min ? min : (val > max ? max : val);
 }
 
@@ -213,7 +219,7 @@ function lighterColor(OrigColor, Light, check) {
 	g = limitToRGB(+OrigColor.split(", ")[1] + +Light);
 	b = limitToRGB(+OrigColor.split(", ")[2] + +Light);
 	var Result = r + ", " + g + ", " + b;
-	console.log(OrigColor + " Made Lighter! Now it's " + Result);
+	debugLog(OrigColor + " Made Lighter! Now it's " + Result);
 	return Result;
 }
 
@@ -226,6 +232,7 @@ function resetCat() {
 	cursePower = 1.1;
 	animPreview.load(JSON.parse(editedLottie));
 	navigator.vibrate(0);
+	debugLog("Cat resetted")
 }
 
 //Function: Edits the editedLottie adding a Curse/Random Corruption. 100% made by @Marekkon5 lmso
@@ -259,6 +266,7 @@ function addCurse() {
 	applyPaletteJSON();
 	animPreview.load(editedLottie);
 	cursePower += 0.1;
+	debugLog("A curse has been added");
 }
 
 //Function: Pause and Plays the Animation when clicked
@@ -267,10 +275,12 @@ function playPauseCat() {
 	if (isLottiePlaying == true) {
 		animPreview.pause();
 		isLottiePlaying = false;
+		debugLog("Animation stopped");
 	}
 	else {
 		animPreview.play();
 		isLottiePlaying = true;
+		debugLog("animation started");
 	}
 }
 
@@ -289,6 +299,7 @@ function randomizePalette() {
 		updatePalette();
 		applyPaletteJSON();
 		animPreview.load(editedLottie);
+		debugLog("The palette has been randomized");
 }
 
 //Function: Randomizes an RGB Color
@@ -298,12 +309,14 @@ function randomizeRGB() {
 	var g = Math.floor(Math.random() * 256);
 	var b = Math.floor(Math.random() * 256);
 	var sp = ', ';
+	debugLog("The color " + r + sp + g + sp + b + " ha been randomized");
 	return r + sp + g + sp + b;
 }
 
 //Function: Easter Egg ;)
 
 function easterEgg() {
+	debugLog("easterEgg started");
 	lottieanimation = easterLottie;
 	title1.innerText = 'ahahah';
 	title2.innerText = 'vibing penis';
@@ -311,4 +324,16 @@ function easterEgg() {
 	downJSONButton.innerText = '@francasDM';
 	downloadButton.innerText = '@Marekkon5';
 	navigator.vibrate([600000]);
+}
+
+//Function: Enables a debug mode
+//Function: Makes a console log only if debug mode is enabled
+
+function debugMode(set) {
+	debugVar = set;
+	console.log("Debug Mode is now set to " + set);
+}
+
+function debugLog(text) {
+	if (debugVar == true) console.log(text);
 }
