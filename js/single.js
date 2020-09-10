@@ -158,7 +158,7 @@ function copyJSON() {
 	borderInputLegacy.value = editedLottie;
 	var copyText = document.querySelector("#borderInputLegacy");
 	copyText.select();
-	copyText.setSelectionRange(0, 99999);
+	copyText.setSelectionRange(0, editedLottie.length);
 	document.execCommand("copy");
 	M.toast({html: 'JSON Code copied to clipboard'});
 	debugLog("JSON Code copied to clipboard");
