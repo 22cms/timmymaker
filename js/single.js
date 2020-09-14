@@ -309,7 +309,7 @@ function randomizeRGB() {
 	var g = Math.floor(Math.random() * 256);
 	var b = Math.floor(Math.random() * 256);
 	var sp = ', ';
-	debugLog("The color " + r + sp + g + sp + b + " ha been randomized");
+	debugLog("The color " + r + sp + g + sp + b + " has been randomized");
 	return r + sp + g + sp + b;
 }
 
