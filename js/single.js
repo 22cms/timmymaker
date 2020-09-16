@@ -353,7 +353,7 @@ function easter2() {
 	debugLog("easterEgg 2 started");
 	title1.innerText = 'The Reverse Rolling Cat';
 	title2.innerText = 'Our God is real!';
-	title3.innerText = 'OwO OwO OwO OwO';
+	title3.innerText = 'OwO OwO OwO';
 	animPreview.setDirection(-1);
 	animPreview.setLooping(true);
 	isDestroyToDo = true;
@@ -366,6 +366,7 @@ function btnEaster(btnId) {
 	if (isDestroyToDo == true) {
 		debugLog("The button " + btnId.id + " is being destroyed");
 		tp.play();
+		title3.innerText = title3.innerText.replace("OwO", "qwq");
 		document.getElementById(btnId.id).classList.add("destroy");
 		M.toast({html: "Don't Download the holy Cat! >:/"});
 		return true
