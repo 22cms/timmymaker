@@ -43,7 +43,6 @@ const downJSONButton = document.getElementById("downJSONButton");
 const copyButton = document.getElementById("copyButton");
 
 applyButton.addEventListener('click',buttonPressed);
-copyButton.addEventListener('click',copyJSON);
 
 //Declare All Palette's Colors and set them as default obtaining them from text boxes' default values
 
@@ -54,16 +53,19 @@ var PaletteTailPiece = hexToRgb(tailPieceInput.value);
 var PaletteEarIn = hexToRgb(earInInput.value);
 var PaletteEyesMounth = hexToRgb(eyesInput.value);
 
-//Declare Category Titles for easterEgg
+//Declare Category Titles for easterEgg 1, then isDestroyToDo and tp for easterEgg 2
 
 const title1 = document.getElementById("title1");
 const title2 = document.getElementById("title2");
 const title3 = document.getElementById("title3");
 
+var isDestroyToDo = false;
+const tp = document.getElementById("tp");
+
 //Apply the palette to the image and json
 
 applyPaletteJSON();
-animPreview.load(JSON.parse(editedLottie));
+reloadPreview();
 
 //Function: update the palette to the current values of the text boxes
 
@@ -120,7 +122,7 @@ function buttonPressed() {
 	updatePalette();
 	applyPaletteJSON();
 	isLottiePlaying = true;
-	animPreview.load(JSON.parse(editedLottie));
+	reloadPreview();
 }
 
 //Function: Starts downloading the converted TGS file using the TGSKit library
@@ -182,6 +184,7 @@ function checkHexColor(color, palette) {
 	if (color.slice(0, 1) == '#') {
 	return hexToRgb(color);}
 	else if (color == 'penis') {easterEgg(); return palette;}
+	else if (color == 'reverse') {easter2(); return palette;}
 	else {
 	return color;}
 }
@@ -223,14 +226,18 @@ function lighterColor(OrigColor, Light, check) {
 	return Result;
 }
 
-//Function: Reset Cat's Lottie Code to default state
+//Function: Reset Cat's Lottie Code to default state and disable easterEggs
 
 function resetCat() {
+	var destoried = document.getElementsByClassName("destroy");
 	lottieanimation = originalLottie;
+	isDestroyToDo = false;
+	while (destoried.length) {
+		destoried[0].classList.remove("destroy")}
 	M.toast({html: "<var style='width:145px;'>Felis silvestris catus</var> is now clear from curses, and he's the second son of God"});
 	applyPaletteJSON();
 	cursePower = 1.1;
-	animPreview.load(JSON.parse(editedLottie));
+	reloadPreview();
 	navigator.vibrate(0);
 	debugLog("Cat resetted")
 }
@@ -313,6 +320,14 @@ function randomizeRGB() {
 	return r + sp + g + sp + b;
 }
 
+//Function: Reloads the cat preview
+
+function reloadPreview() {
+	debugLog("The preview has been reloaded");
+	animPreview.load(JSON.parse(editedLottie));
+	if (isDestroyToDo == true) easter2()
+}
+
 //Function: Easter Egg ;)
 
 function easterEgg() {
@@ -324,6 +339,38 @@ function easterEgg() {
 	downJSONButton.innerText = '@francasDM';
 	downloadButton.innerText = '@Marekkon5';
 	navigator.vibrate([600000]);
+}
+
+//Function: Downloads the JSON 
+function downloadJSON() {
+	debugLog("JSON Download Started");
+	downloadString(editedLottie, 'application/json', 'sticker')
+}
+
+//Function: Easter Egg 2 ;)
+
+function easter2() {
+	debugLog("easterEgg 2 started");
+	title1.innerText = 'The Reverse Rolling Cat';
+	title2.innerText = 'Our God is real!';
+	title3.innerText = 'OwO OwO OwO OwO';
+	animPreview.setDirection(-1);
+	animPreview.setLooping(true);
+	isDestroyToDo = true;
+	
+}
+
+//Function: Checks if easterEgg 2 is in action, if it is, destroy the button, if not, continue doing what was doing
+
+function btnEaster(btnId) {
+	if (isDestroyToDo == true) {
+		debugLog("The button " + btnId.id + " is being destroyed");
+		tp.play();
+		document.getElementById(btnId.id).classList.add("destroy");
+		M.toast({html: "Don't Download the holy Cat! >:/"});
+		return true
+	}
+	else return false
 }
 
 //Function: Enables a debug mode

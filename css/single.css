@@ -112,6 +112,24 @@
 .spacerh {
 	height: 10px;
 }
+@keyframes destroy {
+	0%{filter:brightness(1); opacity:1}
+	50%{filter:brightness(9); opacity:1}
+	100%{filter:brightness(0); opacity:0}
+}
+.destroy {
+	animation-name: destroy;
+	animation-duration: 0.5s;
+	filter: brightness(0); 
+	opacity: 0; 
+}
+
+
+
+
+
+/*Mobile thing*/
+
 @media only screen
 and (max-device-width:900px)
 {.contvl {

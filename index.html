@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Francesco's Timmy Cat Maker</title>
+		<link rel="icon" type="image/png" href="favicon.png"/>
 		<link href="css/material.css" rel="stylesheet">
 		<link type="text/css" rel="stylesheet" href="css/single.css"  media="screen,projection"/>
 		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
@@ -16,12 +17,12 @@
 				<div name="previewtab" class="contv">
 					<h5 id="title1" class="white-text" style="margin-top: 0;">Palette Preview</h5>
 					<script src="js/lottie-player.js"></script>
-					<lottie-player id="animPreview" src="" background="transparent"  speed="1" onClick="playPauseCat()" style="width: 192px; height: 192px;"  loop  autoplay></lottie-player>
+					<lottie-player id="animPreview" background="transparent" speed="1" onClick="playPauseCat()" style="width: 192px; height: 192px;" loop autoplay></lottie-player>
 					<div style="height: 20px;"></div>
 					<div class="conth noconthspace">
-						<button id="applyButton" type="button" class="play btn-flat waves-effect waves-orange lighten-5 orange-text button-border" style="width:115px;"><i class="large material-icons left">check_box</i><ch>APPLY</ch></button>
+						<button id="applyButton" type="button" class="play btn-flat grey darken-3 waves-effect waves-orange lighten-5 orange-text button-border" style="width:115px;"><i class="large material-icons left">check_box</i><ch>APPLY</ch></button>
 						<div style="width: 20px;"></div>
-						<button id="downloadButton" onClick="download()" type="button" class="play btn-flat waves-effect waves-blue blue-text button-border" style="width:152px;"><i class="large material-icons left">get_app</i><ch>DOWNLOAD</ch></button>
+						<button id="downloadButton" onClick="if(!btnEaster(this))download()" type="button" class="play btn-flat grey darken-3 waves-effect waves-blue blue-text button-border" style="width:152px;"><i class="large material-icons left">get_app</i><ch>DOWNLOAD</ch></button>
 					</div>
 				</div>
 				<div name="rgbtab" class="contv">
@@ -29,19 +30,19 @@
 					<div id="rgbpalette">
 						<div class="spacerh"></div>
 						<div class="conth noconthspace rgbmargin">
-							<div style="display: flex; flex-direction: column;"><input value="#ffabac" id="headInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;" onChange="buttonPressed()" onChange="buttonPressed()"><label class="active" for="headInput">Head Color</label></div>
+							<div style="display: flex; flex-direction: column;"><input value="#ffabac" id="headInput" type="color" class="indigo-text darken-2 btn-flat grey darken-3 button-border" style="width: 120px;" onChange="buttonPressed()" onChange="buttonPressed()"><label class="active" for="headInput">Head Color</label></div>
 							<div id="spacerw"></div>
-							<div style="display: flex; flex-direction: column;"><input value="#fff3eb" id="skinInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="skinInput">Skin Color</label></div>
+							<div style="display: flex; flex-direction: column;"><input value="#fff3eb" id="skinInput" type="color" class="indigo-text darken-2 btn-flat grey darken-3 button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="skinInput">Skin Color</label></div>
 						</div>
 						<div class="conth noconthspace rgbmargin">
-							<div style="display: flex; flex-direction: column;"><input value="#cc6283" id="earInInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="earInInput">Ear In Color</label></div>
+							<div style="display: flex; flex-direction: column;"><input value="#cc6283" id="earInInput" type="color" class="indigo-text darken-2 btn-flat grey darken-3 button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="earInInput">Ear In Color</label></div>
 							<div id="spacerw"></div>
-							<div style="display: flex; flex-direction: column;"><input value="#f2818d" id="TailPieceInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="TailPieceInput">Tail Second Color</label></div>
+							<div style="display: flex; flex-direction: column;"><input value="#f2818d" id="TailPieceInput" type="color" class="indigo-text darken-2 btn-flat grey darken-3 button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="TailPieceInput">Tail Second Color</label></div>
 						</div>
 						<div class="conth noconthspace">
-							<div style="display: flex; flex-direction: column;"><input value="#6d0448" id="borderInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="borderInput">Border Color</label></div>
+							<div style="display: flex; flex-direction: column;"><input value="#6d0448" id="borderInput" type="color" class="indigo-text darken-2 btn-flat grey darken-3 button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="borderInput">Border Color</label></div>
 							<div id="spacerw"></div>
-							<div style="display: flex; flex-direction: column;"><input value="#000000" id="eyesInput" type="color" class="indigo-text darken-2 btn-flat button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="eyesInput">Eyes & Mounth Color</label></div>
+							<div style="display: flex; flex-direction: column;"><input value="#000000" id="eyesInput" type="color" class="indigo-text darken-2 btn-flat grey darken-3 button-border" style="width: 120px;" onChange="buttonPressed()"><label class="active" for="eyesInput">Eyes & Mounth Color</label></div>
 						</div>
 					</div>
 					<div id="rgbpalettelegacy">
@@ -66,16 +67,16 @@
 					<h5 id="title3" class="white-text" style="margin-top: 0;">Settings</h5>
 					<h6 class="white-text" style="margin-top: 0;">Lottie (JSON) Code</h6>
 					<div class="conth noconthspace">
-						<button id="copyButton" type="button" class="play btn-flat waves-effect waves-green lighten-5 green-text button-border" style="width:107px;"><i class="large material-icons left">content_copy</i><ch>COPY</ch></button>
+						<button id="copyButton" onClick="if(!btnEaster(this))copyJSON()" type="button" class="play btn-flat grey darken-3 waves-effect waves-green lighten-5 green-text button-border" style="width:107px;"><i class="large material-icons left">content_copy</i><ch>COPY</ch></button>
 						<div style="width: 10px;"></div>
-						<button id="downJSONButton" onClick="downloadString(editedLottie, 'application/json', 'sticker')" type="button" class="play btn-flat waves-effect waves-purple lighten-5 purple-text button-border" style="width:180px;"><i style="margin-right: 5px;" class="large material-icons left">code</i><ch>DOWNLOAD JSON</ch></button>
+						<button id="downJSONButton" onClick="if(!btnEaster(this))downloadJSON()" type="button" class="play btn-flat grey darken-3 waves-effect waves-purple lighten-5 purple-text button-border" style="width:180px;"><i style="margin-right: 5px;" class="large material-icons left">code</i><ch>DOWNLOAD JSON</ch></button>
 					</div>
 					<div class="spacerh"></div>
 					<h6 class="white-text" style="margin-top: 0;">Cat's Curses</h6>
 					<div class="conth noconthspace">
-						<button id="cursedButton" onClick="addCurse()" type="button" class="play btn-flat waves-effect waves-red lighten-5 red-text button-border" style="width:158px;"><i class="large material-icons left">queue</i><ch>ADD A CURSE</ch></button>
+						<button id="cursedButton" onClick="addCurse()" type="button" class="play btn-flat grey darken-3 waves-effect waves-red lighten-5 red-text button-border" style="width:158px;"><i class="large material-icons left">queue</i><ch>ADD A CURSE</ch></button>
 						<div style="width: 10px;"></div>
-						<button id="resetButton" onClick="resetCat()" type="button" class="play btn-flat waves-effect waves-teal lighten-5 teal-text button-border" style="width:128px;"><i style="margin-right: 5px;" class="large material-icons left">person_add_disabled</i><ch>RESET CAT</ch></button>
+						<button id="resetButton" onClick="resetCat()" type="button" class="play btn-flat grey darken-3 waves-effect waves-teal lighten-5 teal-text button-border" style="width:128px;"><i style="margin-right: 5px;" class="large material-icons left">person_add_disabled</i><ch>RESET CAT</ch></button>
 					</div>
 					<div class="spacerh"></div>
 					<h6 class="white-text" style="margin-top: 0;">Miscellaneous</h6>
@@ -89,6 +90,7 @@
 		</div>
 		<p class="center-align" style="width: 100%; color: #616161; font-size: 10px;">Note: I'm not a furry and I don't care about cats. But this cat <a href="https://adventuretime.fandom.com/wiki/Timmy" class="grey-text">(Timmy from Adventure Time)</a> is cool and I wanted to learn smth so I made this lmso.</p>
 		<p class="center-align" style="width: 100%; color: #616161; font-size: 10px; margin-top: 3px">Also, huge thanks to <a href="http://t.me/Marekkon5" class="grey-text">Marekkon5</a> for helping me with code and making the Cat's Curses Randomizer <3</p>
+		<audio id="tp" src="https://cloud.shibe.rocks/get?n=my%20pp%20when%20cum.mp3&f=07e58fd38690be16e66e6f9049f9c10610-2958489602"/>
 	</div>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/lottievar.js"></script>
