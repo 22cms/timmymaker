@@ -14,7 +14,7 @@ const RGBPalettePickerLegacy = document.getElementById("rgbpalettelegacy");
 const generalBorderCheck = document.getElementById("generalBorderCheck");
 
 var SelectedPalette = 'Legacy';
-if (screen.width>600) {SelectedPalette = 'New';}
+/* if (screen.width>600) {SelectedPalette = 'New';} */
 
 //Declare the lottie player
 
