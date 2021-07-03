@@ -13,8 +13,7 @@ const RGBPalettePicker = document.getElementById("rgbpalette");
 const RGBPalettePickerLegacy = document.getElementById("rgbpalettelegacy");
 const generalBorderCheck = document.getElementById("generalBorderCheck");
 
-var SelectedPalette = 'Legacy';
-/* if (screen.width>600) {SelectedPalette = 'New';} */
+var SelectedPalette = 'New';
 
 //Declare the lottie player
 
@@ -60,7 +59,6 @@ const title2 = document.getElementById("title2");
 const title3 = document.getElementById("title3");
 
 var isDestroyToDo = false;
-const tp = document.getElementById("tp");
 
 //Apply the palette to the image and json
 
@@ -365,7 +363,6 @@ function easter2() {
 function btnEaster(btnId) {
 	if (isDestroyToDo == true) {
 		debugLog("The button " + btnId.id + " is being destroyed");
-		tp.play();
 		title3.innerText = title3.innerText.replace("OwO", "qwq");
 		document.getElementById(btnId.id).classList.add("destroy");
 		M.toast({html: "Don't Download the holy Cat! >:/"});
